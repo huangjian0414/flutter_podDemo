@@ -7,5 +7,5 @@ target 'flutter_podDemo' do
 
   # Pods for flutter_podDemo
   pod 'flutter_pod', :path => '../flutter_pod'
-  #pod 'flutter_pod',:git =>'https://github.com/huangjian0414/flutter_pod',:tag => '0.1.1'
+  #pod 'flutter_pod',:git =>'https://github.com/huangjian0414/flutter_pod',:tag => '1.0.0'
 end
