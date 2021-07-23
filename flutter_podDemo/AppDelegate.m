@@ -26,6 +26,15 @@
     
     [GeneratedPluginRegistrant registerWithRegistry:self];
     
+//    self.flutterEngine = [[FlutterEngine alloc]initWithName:@"hj_flutter_engine"];
+    //指定入口， flutter需配置
+    //[self.flutterEngine runWithEntrypoint:@""];
+    /// 提前run
+//    [self.flutterEngine run];
+    
+    self.engineGroup = [[FlutterEngineGroup alloc]initWithName:@"hj_engine_group" project:nil];
+    
+    
     return YES;
 }
 

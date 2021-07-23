@@ -7,9 +7,13 @@
 
 #import "ViewController.h"
 #import "FlutterCustomController.h"
+#import "AppDelegate.h"
 
 @interface ViewController ()
 @property(nonatomic,strong)UILabel *fromFlutterTextLabel;
+
+@property(nonatomic,strong)FlutterEngine *firstEngine;
+@property(nonatomic,strong)FlutterEngine *secondEngine;
 @end
 
 @implementation ViewController
@@ -18,14 +22,30 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setUpUI];
+    
+    FlutterEngineGroup *group = ((AppDelegate *)UIApplication.sharedApplication.delegate).engineGroup;
+    self.firstEngine = [group makeEngineWithEntrypoint:nil libraryURI:nil];
+    [self.firstEngine run];
+    self.secondEngine = [group makeEngineWithEntrypoint:@"otherMain" libraryURI:nil];
+    [self.secondEngine run];
+    
 }
 -(void)pushHomePage{
-    FlutterCustomController *flutterViewController = [[FlutterCustomController alloc]initWithProject:nil initialRoute:@"/homePage" nibName:nil bundle:nil];
-    [self.navigationController pushViewController:flutterViewController animated:YES];
+//    FlutterCustomController *flutterViewController = [[FlutterCustomController alloc]initWithProject:nil initialRoute:@"/homePage" nibName:nil bundle:nil];
+//    [self.navigationController pushViewController:flutterViewController animated:YES];
+    FlutterCustomController *vc = [[FlutterCustomController alloc]initWithEngine:self.secondEngine nibName:nil bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)defaultPush{
-    FlutterCustomController *flutterViewController = [[FlutterCustomController alloc] init];
-    [self.navigationController pushViewController:flutterViewController animated:YES];
+//    FlutterCustomController *flutterViewController = [[FlutterCustomController alloc] init];
+//    [self.navigationController pushViewController:flutterViewController animated:YES];
+    
+//    FlutterEngine *flutterEngine = ((AppDelegate *)UIApplication.sharedApplication.delegate).flutterEngine;
+//    FlutterCustomController *flutterViewController = [[FlutterCustomController alloc]initWithEngine:flutterEngine nibName:nil bundle:nil];
+//    [self.navigationController pushViewController:flutterViewController animated:YES];
+    
+    FlutterCustomController *vc = [[FlutterCustomController alloc]initWithEngine:self.firstEngine nibName:nil bundle:nil];
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
 -(void)btnAction{
